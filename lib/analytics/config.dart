@@ -18,7 +18,7 @@ class AnalyticsConfig extends ChangeNotifier with SettingsSharedPref {
   final SharedPreferences pref;
 
   var appVersion = "";
-  var enabled = true;
+  var enabled = false;
 
   void load(SharedPreferences pref) {
     appVersion = pref.getString("appVersion") ?? "";

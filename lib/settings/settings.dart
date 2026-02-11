@@ -59,7 +59,7 @@ class Settings extends ChangeNotifier with SettingsSharedPref {
   bool swipeToDelete = true;
   bool emojiParser = true;
 
-  bool bottomMenuBar = true;
+  bool bottomMenuBar = false;
   bool confirmDelete = true;
   bool hardWrap = false;
 
@@ -383,7 +383,7 @@ class SettingsFolderViewType extends GjSetting {
       SettingsFolderViewType(Lk.widgetsFolderViewViewsCard, "Card");
   static const Grid =
       SettingsFolderViewType(Lk.widgetsFolderViewViewsGrid, "Grid");
-  static const Default = Standard;
+  static const Default = Card;
 
   const SettingsFolderViewType(super.lk, super.str);
 

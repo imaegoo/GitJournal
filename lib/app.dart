@@ -30,7 +30,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:quick_actions/quick_actions.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:universal_io/io.dart' show Directory, Platform;
 
@@ -327,7 +326,6 @@ class JournalAppState extends State<JournalApp> {
       themeMode: themeMode,
       navigatorObservers: <NavigatorObserver>[
         AnalyticsRouteObserver(),
-        SentryNavigatorObserver(),
       ],
       initialRoute: initialRoute,
       debugShowCheckedModeBanner: false,

@@ -19,11 +19,11 @@ class AppConfig extends ChangeNotifier {
   // Properties
   //
   var onBoardingCompleted = false;
-  var collectCrashReports = true;
+  var collectCrashReports = false;
 
   int version = 0;
 
-  bool proMode = false;
+  bool proMode = true;
 
   var validateProMode = true;
 

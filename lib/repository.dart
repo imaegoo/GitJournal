@@ -34,7 +34,6 @@ import 'package:gitjournal/settings/settings_migrations.dart';
 import 'package:gitjournal/settings/storage_config.dart';
 import 'package:gitjournal/sync_attempt.dart';
 import 'package:path/path.dart' as p;
-import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:synchronized/synchronized.dart';
@@ -118,13 +117,6 @@ class GitJournalRepo with ChangeNotifier {
 
     var settings = Settings(id, pref);
     settings.load();
-
-    Sentry.configureScope((scope) {
-      scope.setContexts('StorageConfig', storageConfig.toLoggableMap());
-      scope.setContexts('FolderConfig', folderConfig.toLoggableMap());
-      scope.setContexts('GitConfig', gitConfig.toLoggableMap());
-      scope.setContexts('Settings', settings.toLoggableMap());
-    });
 
     logEvent(
       Event.StorageConfig,

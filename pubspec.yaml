@@ -84,7 +84,6 @@ dependencies:
   receive_sharing_intent:
     git:
       url: https://github.com/KasemJaffer/receive_sharing_intent
-  sentry_flutter: ^9.7.0
   share_plus: ^10.0.2
   shared_preferences: ^2.0.5
   sprintf: ^7.0.0
