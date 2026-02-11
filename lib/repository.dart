@@ -40,6 +40,8 @@ import 'package:synchronized/synchronized.dart';
 import 'package:time/time.dart';
 import 'package:universal_io/io.dart' as io;
 import 'package:universal_io/io.dart' show Platform;
+import 'package:gitjournal/setup/clone_auto_select.dart';
+import 'package:git_setup/git_transfer_progress.dart';
 
 class GitJournalRepo with ChangeNotifier {
   final RepositoryManager repoManager;
@@ -350,11 +352,29 @@ class GitJournalRepo with ChangeNotifier {
         try {
           await _gitRepo.merge();
         } catch (ex) {
-          // When there is nothing to merge into
-          if (ex is! GitRefNotFound) {
+          Log.i("Merge failed, deleting and re-cloning");
+          var remotes = await remoteConfigs();
+          if (remotes.isEmpty) {
             rethrow;
-            // FIXME: Do not throw this exception, try to solve it somehow!!
           }
+          var remote = remotes.first;
+
+          await delete();
+          await io.Directory(p.join(repoPath, '.git'))
+              .create(recursive: true);
+          await io.Directory(cacheDir).create(recursive: true);
+
+          await cloneRemote(
+            repoPath: repoPath,
+            cloneUrl: remote.url,
+            remoteName: remote.name,
+            sshPublicKey: gitConfig.sshPublicKey,
+            sshPrivateKey: gitConfig.sshPrivateKey,
+            sshPassword: gitConfig.sshPassword,
+            authorName: gitConfig.gitAuthor,
+            authorEmail: gitConfig.gitAuthorEmail,
+            progressUpdate: (progress) {},
+          );
         }
       });
 
